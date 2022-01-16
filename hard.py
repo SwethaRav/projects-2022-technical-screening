@@ -23,6 +23,26 @@ with open("./conditions.json") as f:
     CONDITIONS = json.load(f)
     f.close()
 
+       for k,v in CONDITIONS.items():
+        if(k == 'COMP3151'):
+            value = str(v)
+            newvalue = ""
+            forbidden = ".()"
+            splithere = ['or', 'OR', 'and', 'AND']
+            for v in value:
+                if v not in forbidden:
+                    newvalue = newvalue + v
+
+            latestvalue = newvalue.replace(" ","")
+            if latestvalue.find('or') != -1:
+                small_or = latestvalue.split('or')
+            if latestvalue.find('OR') != -1:
+                OR  = latestvalue.split('OR')
+            print('hello')
+            print(small_or)
+            print(OR)
+            print(OR + small_or)
+            
 def is_unlocked(courses_list, target_course):
     """Given a list of course codes a student has taken, return true if the target_course 
     can be unlocked by them.
