@@ -33,9 +33,54 @@ var assert = require("assert")
 
 const altNumbers = (numArray) => {
     // TODO: COMPLETE THIS FUNCTION
-    return [];
-}
+    let countpositive = 0;
+    let countnegative = 0;
+    //this is to check the number of positive and negative # in the array
+    for(let i = 0; i < numArray.length;i++){
+        if(numArray[i] >= 0){
+            countpositive++;
+        } else if (numArray[i] < 0){
+            countnegative++;
+        }   
+    }
 
+    //second part
+    //determine the rearrangement of numbers in new array
+    const arranged =  new Array(numArray.length);
+    let pos = 0;
+    let posOther = 1;
+    for(let i = 0; i < numArray.length;i++){
+        // if pos num >= neg num --> array starts with pos number
+        if(countpositive >= countnegative){
+            //array[0] == pos num
+            if(pos < numArray.length || posOther < numArray.length)
+                if(numArray[i] >= 0){
+                    arranged[pos] = numArray[i];
+                    pos = pos+2;
+
+                }else if(numArray[i] < 0){
+                    arranged[posOther] = numArray[i];
+
+                    posOther = posOther +2;
+
+                }
+        }
+        // if neg num > pos num --> array starts with neg num
+        else if(countpositive < countnegative) {
+            //array[0] == neg num
+            if(pos < numArray.length || posOther < numArray.length){
+                if(numArray[i] < 0){
+                    arranged[pos] = numArray[i];
+                    pos = pos+2;
+                } else if (numArray[i] >= 0){
+                    arranged[posOther] = numArray[i];
+                    posOther = posOther + 2;
+                }
+            }
+        }
+    }
+    return arranged;
+}
 module.exports = { altNumbers } // Do not modify this line
 
 // ====================TESTS====================
